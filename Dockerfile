@@ -12,4 +12,4 @@ EXPOSE 60000
 
 #使用`dotnet HelloWebApp.dll`来运行应用程序
 
-CMD ["dotnet", "dockerwebapi.dll", "--server.urls", "http://*:60000"]
+CMD ["dotnet", "dockerAPI.dll", "--server.urls", "http://*:60000"]
