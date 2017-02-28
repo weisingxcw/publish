@@ -1,20 +1,15 @@
-# »ùÓÚmicrosoft/dotnet:latest¹¹½¨Docker Image
-FROM microsoft/dotnet:latest
- 
-# ½øÈëdockerÖĞµÄ/usr/local/srcÄ¿Â¼
-RUN cd /usr/local/src
- 
-# ´´½¨DockerWebAPIÄ¿Â¼
-RUN mkdir DockerWeb
- 
-# ÉèÖÃ¹¤×÷Â·¾¶
-WORKDIR /usr/local/src/DockerWeb
- 
-# ½«µ±Ç°ÎÄ¼ş¼ĞÏÂµÄËùÓĞÎÄ¼şÈ«²¿¸´ÖÆµ½¹¤×÷Ä¿Â¼
-COPY *.* ./
- 
-# ÏòÍâ½ç±©Â¶5000¶Ë¿Ú
-EXPOSE 5000
- 
-# Ö´ĞĞdotnet DockerWebAPI.dllÃüÁî
-CMD ["dotnet", "dockerAPI.dll"]
+#åŸºäº `microsoft/dotnet:1.0.0-core` æ¥æ„å»ºæˆ‘ä»¬çš„é•œåƒ
+FROM microsoft/dotnet:1.0.0-core
+
+#æ‹·è´é¡¹ç›®publishæ–‡ä»¶å¤¹ä¸­çš„æ‰€æœ‰æ–‡ä»¶åˆ° dockerå®¹å™¨ä¸­çš„publishæ–‡ä»¶å¤¹ä¸­  
+COPY . /publish
+
+#è®¾ç½®å·¥ä½œç›®å½•ä¸º `/publish` æ–‡ä»¶å¤¹ï¼Œå³å®¹å™¨å¯åŠ¨é»˜è®¤çš„æ–‡ä»¶å¤¹
+WORKDIR /publish
+
+#è®¾ç½®Dockerå®¹å™¨å¯¹å¤–æš´éœ²60000ç«¯å£
+EXPOSE 60000
+
+#ä½¿ç”¨`dotnet HelloWebApp.dll`æ¥è¿è¡Œåº”ç”¨ç¨‹åº
+
+CMD ["dotnet", "dockerwebapi.dll", "--server.urls", "http://*:60000"]
